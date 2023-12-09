@@ -7,6 +7,7 @@ import {
 	useRoom,
 } from '@huddle01/react/hooks'
 import { useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import RemotePeer from '@/components/RemotePeer'
 import { AccessToken, Role } from '@huddle01/server-sdk/auth'
 
@@ -14,6 +15,10 @@ const inter = Inter({ subsets: ['latin'] })
 
 type Props = {
 	token: string
+}
+type LocationState = {
+	latitude: number | null
+	longitude: number | null
 }
 
 export default function Home({ token }: Props) {
@@ -28,6 +33,31 @@ export default function Home({ token }: Props) {
 
 	const { enableVideo, isVideoOn, stream, disableVideo } = useLocalVideo()
 	const { enableAudio, isAudioOn, stream: audioStream } = useLocalAudio()
+	const [location, setLocation] = useState<LocationState>({
+		latitude: null,
+		longitude: null,
+	})
+
+	const [error, setError] = useState('')
+
+	const getLocation = () => {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(
+				(position) => {
+					setLocation({
+						latitude: position.coords.latitude,
+						longitude: position.coords.longitude,
+					})
+					setError('')
+				},
+				(err) => {
+					setError(err.message)
+				},
+			)
+		} else {
+			setError('Geolocation is not supported by this browser.')
+		}
+	}
 
 	const { peerIds } = usePeerIds()
 
@@ -88,6 +118,20 @@ export default function Home({ token }: Props) {
 					>
 						Enable Audio
 					</button>
+
+					<button
+						type='button'
+						className='bg-blue-500 p-2 mx-2'
+						onClick={getLocation}
+					>
+						Get Location
+					</button>
+					{location.latitude !== null && location.longitude !== null ? (
+						<p className='bg-blue-500 p-2 mx-2'>
+							Latitude: {location.latitude}, Longitude: {location.longitude}
+						</p>
+					) : null}
+					{error ? <p>Error: {error}</p> : null}
 				</div>
 			</div>
 
