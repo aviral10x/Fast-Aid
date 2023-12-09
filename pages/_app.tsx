@@ -1,15 +1,23 @@
-import type { AppProps } from 'next/app'
-import { ThemeProvider } from 'next-themes'
 import '@/styles/globals.css'
+import type { AppProps } from 'next/app'
+
+import { HuddleClient, HuddleProvider } from '@huddle01/react'
+
+const huddleClient = new HuddleClient({
+	projectId: 'zMQHa6hH5hGrxfwYZp7z8I-1lWScI7UA',
+	options: {
+		activeSpeakers: {
+			size: 8,
+		},
+	},
+})
 
 export default function App({ Component, pageProps }: AppProps) {
+	console.log('render')
+
 	return (
-		<ThemeProvider
-			attribute='class'
-			defaultTheme='system'
-			disableTransitionOnChange
-		>
+		<HuddleProvider client={huddleClient}>
 			<Component {...pageProps} />
-		</ThemeProvider>
+		</HuddleProvider>
 	)
 }
