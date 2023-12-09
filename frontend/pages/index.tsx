@@ -10,8 +10,17 @@ import { useEffect, useRef } from 'react'
 import React, { useState } from 'react'
 import RemotePeer from '@/components/RemotePeer'
 import { AccessToken, Role } from '@huddle01/server-sdk/auth'
+import { Recorder } from '@huddle01/server-sdk/recorder'
+
+// components/RecordingControls.js
 
 const inter = Inter({ subsets: ['latin'] })
+
+interface Recording {
+	id: string
+	url: string
+	size: number // Assuming size is a number representing bytes
+}
 
 type Props = {
 	token: string
@@ -57,6 +66,87 @@ export default function Home({ token }: Props) {
 		} else {
 			setError('Geolocation is not supported by this browser.')
 		}
+	}
+
+	const [roomId, setRoomId] = useState('')
+	// const [token, setToken] = useState('')
+	const [rtmpUrls, setRtmpUrls] = useState([])
+
+	const handleStartRecording = async () => {
+		await fetch('/api/recorder', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				action: 'startRecording',
+				roomId,
+				token,
+			}),
+		})
+	}
+
+	const handleStartLivestream = async () => {
+		await fetch('/api/recorder', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				action: 'startLivestream',
+				roomId,
+				token,
+				rtmpUrls,
+			}),
+		})
+	}
+
+	const handleStop = async () => {
+		await fetch('/api/recorder', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				action: 'stop',
+				roomId,
+			}),
+		})
+	}
+
+	async function getRecordings() {
+		const API_KEY = 'zMQHa6hH5hGrxfwYZp7z8I-1lWScI7UA' // Replace with your actual API key
+
+		try {
+			const response = await fetch(
+				'https://api.huddle01.com/api/v1/get-recordings',
+				{
+					method: 'GET',
+					headers: {
+						'Content-type': 'application/json',
+						'x-api-key': API_KEY,
+					},
+				},
+			)
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`)
+			}
+
+			const data = await response.json()
+			console.log(data)
+			return data
+		} catch (error) {
+			console.error('Error fetching recordings:', error)
+		}
+	}
+
+	const [recordings, setRecordings] = useState([])
+
+	const handleStopAndFetchRecordings = async () => {
+		await handleStop() // Assuming this is your function to stop the recording
+		const fetchedRecordings = await getRecordings()
+		setRecordings(fetchedRecordings)
 	}
 
 	const { peerIds } = usePeerIds()
@@ -144,6 +234,49 @@ export default function Home({ token }: Props) {
 						muted
 					/>
 				)}
+			</div>
+
+			<div>
+				{' '}
+				<div>
+					<input
+						type='text'
+						placeholder='Room ID'
+						value={roomId}
+						onChange={(e) => setRoomId(e.target.value)}
+					/>
+					<input
+						type='text'
+						placeholder='Token'
+						value={token}
+						// onChange={(e) => setToken(token)}
+					/>
+					<button onClick={handleStartRecording}>Start Recording</button>
+					<button onClick={handleStartLivestream}>Start Livestream</button>
+					<button onClick={handleStop}>Stop</button>
+					<button onClick={handleStopAndFetchRecordings}>
+						Stop Recording and Fetch Recordings
+					</button>
+
+					{recordings.length > 0 && (
+						<div>
+							<h3>Recordings:</h3>
+							<ul>
+								{recordings.map((recording: Recording) => (
+									<li key={recording.id}>
+										<a
+											href={recording.url}
+											target='_blank'
+											rel='noopener noreferrer'
+										>
+											{recording.id} (Size: {recording.size} bytes)
+										</a>
+									</li>
+								))}
+							</ul>
+						</div>
+					)}
+				</div>
 			</div>
 
 			<div className='mt-4 mb-32 grid gap-2 text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left'>
