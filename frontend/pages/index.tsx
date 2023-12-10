@@ -12,6 +12,8 @@ import RemotePeer from '@/components/RemotePeer'
 import { AccessToken, Role } from '@huddle01/server-sdk/auth'
 import { Recorder } from '@huddle01/server-sdk/recorder'
 import Map from '@/components/Map'
+import Link from 'next/link'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 // components/RecordingControls.js
 
@@ -170,8 +172,10 @@ export default function Home({ token }: Props) {
 		>
 			<div className='z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex'>
 				<p className='fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30'>
-					<code className='font-mono font-bold'>{state}</code>
+					<code className='font-mono font-bold'>Fast Aid</code>
 				</p>
+				{/* <ConnectButton chainStatus='icon' accountStatus='avatar' /> */}
+
 				<div className='fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none'>
 					<button
 						type='button'
@@ -183,7 +187,7 @@ export default function Home({ token }: Props) {
 							})
 						}}
 					>
-						Join Room
+						.
 					</button>
 					<button
 						className='bg-blue-500 p-2 mx-2'
@@ -193,22 +197,22 @@ export default function Home({ token }: Props) {
 					>
 						Enable Video
 					</button>
-					<button
+					{/* <button
 						className='bg-blue-500 p-2 mx-2'
 						onClick={async () => {
 							await disableVideo()
 						}}
 					>
 						Disable Video
-					</button>
-					<button
+					</button> */}
+					{/* <button
 						className='bg-blue-500 p-2 mx-2'
 						onClick={async () => {
 							await enableAudio()
 						}}
 					>
 						Enable Audio
-					</button>
+					</button> */}
 
 					<button
 						type='button'
@@ -240,20 +244,20 @@ export default function Home({ token }: Props) {
 			<div>
 				{' '}
 				<div>
-					<input
+					{/* <input
 						type='text'
-						placeholder='Room ID'
+						// placeholder='Room ID'
 						value={roomId}
 						onChange={(e) => setRoomId(e.target.value)}
-					/>
-					<input
+					/> */}
+					{/* <input
 						type='text'
 						placeholder='Token'
 						value={token}
 						// onChange={(e) => setToken(token)}
-					/>
+					/> */}
 					<button onClick={handleStartRecording}>Start Recording</button>
-					<button onClick={handleStartLivestream}>Start Livestream</button>
+					<button onClick={handleStartLivestream}></button>
 					<button onClick={handleStop}>Stop</button>
 					<button onClick={handleStopAndFetchRecordings}>
 						Stop Recording and Fetch Recordings

@@ -1,7 +1,7 @@
 {
 	"name": "Fast Aid",
 	"short_name": "Fast Aid",
-	"description": " Instantly alerts nearby people when it detects an accident",
+	"description": "Instantly alerts nearby people when it detects an accident",
 	"icons": [
 		{
 			"src": "/images/icon-192.png",
