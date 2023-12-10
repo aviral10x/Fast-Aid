@@ -1,7 +1,7 @@
 {
-	"name": "Rice Bowl",
-	"short_name": "Rice Bowl",
-	"description": "Fluffless jasmine rice for those cold winter nights",
+	"name": "Fast Aid",
+	"short_name": "Fast Aid",
+	"description": " Instantly alerts nearby people when it detects an accident",
 	"icons": [
 		{
 			"src": "/images/icon-192.png",

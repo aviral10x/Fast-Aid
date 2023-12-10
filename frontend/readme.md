@@ -1,5 +1,5 @@
 <p align="center">
-	<img alt="Rice Bowl" src="public/images/icon-512.png" width="90">
+	<img alt="Fast Aid" src="public/images/icon-512.png" width="90">
 	<h2 align="center">Next PWA Template</h2>
 </p>
 
@@ -47,10 +47,10 @@ Fluffless doesn't mean "start with nothing". The goal of this template is to be 
 
 ### Desktop
 
-<img width="1728" alt="Rice Bowl PWA on macOS in dark mode" src="https://github.com/mvllow/next-pwa-template/assets/1474821/889bef1b-af58-4efa-b1f3-3ea021ec9760">
+<img width="1728" alt="First Aid PWA on macOS in dark mode" src="https://github.com/mvllow/next-pwa-template/assets/1474821/889bef1b-af58-4efa-b1f3-3ea021ec9760">
 
 ### Mobile
 
-<img width="360" alt="Rice Bowl PWA on iOS in light mode" src="https://github.com/mvllow/next-pwa-template/assets/1474821/1f0fa36e-23c7-4bcf-aa6e-f447559cae62" />
+<img width="360" alt="First Aid PWA on iOS in light mode" src="https://github.com/mvllow/next-pwa-template/assets/1474821/1f0fa36e-23c7-4bcf-aa6e-f447559cae62" />
 
-<img width="360" alt="Rice Bowl PWA on iOS in dark mode" src="https://github.com/mvllow/next-pwa-template/assets/1474821/2fac61d0-dc29-4022-8b39-003306f80fb4" />
+<img width="360" alt="First Aid PWA on iOS in dark mode" src="https://github.com/mvllow/next-pwa-template/assets/1474821/2fac61d0-dc29-4022-8b39-003306f80fb4" />
