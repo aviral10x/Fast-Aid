@@ -13,7 +13,7 @@ import { AccessToken, Role } from '@huddle01/server-sdk/auth'
 import { Recorder } from '@huddle01/server-sdk/recorder'
 import Map from '@/components/Map'
 import Link from 'next/link'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
+// import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 // components/RecordingControls.js
 

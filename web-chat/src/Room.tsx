@@ -55,7 +55,7 @@ export default function Room(props: RoomProps) {
           <div>Filter: {filterPeersLength}</div>
           <div>Light Push: {lightPushPeersLength}</div>
         </div>
-        <div>Waku v2 Web Chat</div>
+        <div>Fast Aid</div>
         <div>
           <div className="mt-2">
             Peers Discovered:{" "}
