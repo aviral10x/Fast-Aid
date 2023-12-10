@@ -11,6 +11,7 @@ import React, { useState } from 'react'
 import RemotePeer from '@/components/RemotePeer'
 import { AccessToken, Role } from '@huddle01/server-sdk/auth'
 import { Recorder } from '@huddle01/server-sdk/recorder'
+import Map from '@/components/Map'
 
 // components/RecordingControls.js
 
